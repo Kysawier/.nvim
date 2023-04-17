@@ -6,7 +6,7 @@ local options = {
     guicursor = "",
     cursorline = true, -- highlights line on which you are rn
 
-    guifont = "monospace:h17", -- font used in nvim apps
+--    guifont = "Hack:h17", -- font used in nvim apps
 
     nu = true,
     relativenumber = false,
