@@ -7,7 +7,7 @@ local servers = {
     "cssls",
     "sqlls",
     "html",
-    "tsserver",
+    "quick_lint_js",
 }
 
 local settings = {

@@ -43,11 +43,19 @@ packer.init {
 
 return packer.startup(function(use)
     -- Packer can manage itself
+
     use 'wbthomason/packer.nvim' -- makes packer manage itself
     use 'nvim-lua/popup.nvim' -- implementation for the Popup API from vim
     use 'nvim-lua/plenary.nvim' -- useful lua functions used by lots of plugins
 
+    
+    use 'easymotion/vim-easymotion'
+    if vim.g.vscode then
+        use 'asvetliakov/vim-easymotion'
+    else
+
     use 'nvim-telescope/telescope.nvim'
+
 
 
     -- Colorschemes
@@ -119,6 +127,7 @@ return packer.startup(function(use)
 --        }
 --    })
 --
+    end
     if PACKER_BOOTSTRAP then
         require('packer').sunc()
     end
