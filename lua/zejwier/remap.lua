@@ -1,6 +1,26 @@
 local opts = { noremap = true, silent = true }
+
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>t", vim.cmd.Ex)
+
+
+function detach_on_buffer_change()
+    local clients = vim.lsp.buf_get_clients(0);
+    if clients then
+        for _, client in ipairs(clients) do
+            vim.lsp.buf_detach_client(0, client)
+        end
+    end
+end
+
+
+local function netrw_use()
+    vim.cmd([[Ex]])
+    vim.cmd([[LspStop]])
+    --vim.lsp.stop_client(vim.lsp.get_active_clients())
+    --detach_on_buffer_change()
+end
+
+vim.keymap.set("n", "<leader>t", netrw_use)
 
 vim.keymap.set("i", "jk", "<Esc>")
 

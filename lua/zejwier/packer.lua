@@ -1,5 +1,7 @@
 local fn = vim.fn
 
+
+
 -- Automatucally install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -129,7 +131,7 @@ return packer.startup(function(use)
 --
     end
     if PACKER_BOOTSTRAP then
-        require('packer').sunc()
+        require('packer').sync()
     end
 
 end)

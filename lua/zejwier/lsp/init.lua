@@ -4,6 +4,7 @@ if not status_ok then
     return
 end
 
+
 require('zejwier.lsp.mason')
 require('zejwier.lsp.handlers').setup()
 require('zejwier.lsp.null-ls')

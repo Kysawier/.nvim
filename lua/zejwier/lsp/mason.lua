@@ -2,13 +2,13 @@ local servers = {
     "lua_ls",
     "pyright",
     "jsonls",
-    "csharp_ls",
     "bashls",
     "cssls",
     "sqlls",
     "html",
-    "eslint",
+    "tsserver",
 }
+--local
 
 local settings = {
     ui = {
@@ -21,6 +21,7 @@ local settings = {
     },
     log_level = vim.log.levels.INFO,
     max_concurrent_installers = 4,
+
 }
 
 require('mason').setup(settings)
@@ -35,7 +36,6 @@ if not status_ok then
     vim.notify('lspconfig didn`t worked')
     return
 end
-
 
 local opts = {}
 
@@ -56,3 +56,10 @@ for _, server in pairs(servers) do
     lspconfig[server].setup(opts)
 
 end
+
+--vim.cmd([[
+--augroup deatch_lsp_on_buffer_change 
+--    autocmd!
+--    autocmd BufWinEnter * lua detach_on_buffer_change()
+--augroup END
+--]])

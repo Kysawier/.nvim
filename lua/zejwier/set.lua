@@ -43,6 +43,8 @@ local options = {
 
     updatetime = 50,
     colorcolumn = "0",
+
+    filetype = "on",
 }
 
 for k, v in pairs(options) do

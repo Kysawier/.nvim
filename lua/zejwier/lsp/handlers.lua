@@ -1,6 +1,7 @@
 local M = {}
 
 
+
 -- TODO: backfill this to template
 M.setup = function()
     local signs = {
@@ -85,22 +86,24 @@ local function lsp_keymaps(bufnr)
     vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
+local function exclude_netrw()
+    local ft = vim.bo.filetype
+
+    vim.notify("" + ft)
+    if ft == 'netrw' then
+        return false
+    end
+    return true
+end
+
 M.on_attach = function(client, bufnr)
-    if client.name == "tsserver" then
-        client.server_capabilities.documentFormattingProvider = false
-    end
-    if client.name == 'omnisharp' then
-        local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
-        for i, v in ipairs(tokenModifiers) do
-            tokenModifiers[i] = v:gsub(' ', '_')
+    if exclude_netrw() then
+        if client.name == "tsserver" then
+            client.server_capabilities.documentFormattingProvider = false
         end
-        local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
-        for i, v in ipairs(tokenTypes) do
-            tokenTypes[i] = v:gsub(' ', '_')
-        end
+        lsp_keymaps(bufnr)
+        lsp_highlight_document(client)
     end
-    lsp_keymaps(bufnr)
-    lsp_highlight_document(client)
 end
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
