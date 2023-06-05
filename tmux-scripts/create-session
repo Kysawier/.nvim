@@ -1,0 +1,24 @@
+#!/usr/bin/env bash 
+
+echo "Enter New Session Name and Window Name (separated by ';'): "
+
+IFS=';' read -ra session 
+
+
+#IFS=';' read -ra ADDR <<< "$IN"
+#for i in "${ADDR[@]}"; do
+#    # process "$i"
+#done
+
+session_name="${session[0]}"
+
+if tmux has-session -t "$session_name" 2> /dev/null; then
+    echo "The session $session_name already exists"
+else
+    tmux new-session -s "$session_name" -n "${session[1]}" -d
+    for i in "${session[@]:2}"; do
+        tmux neww -n "$i" -t "$session_name"
+    done
+    tmux switch-client -t "$session_name"
+fi
+

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#watch -n2 'echo `date +%F` >> logger'
+#watch -n2 'echo watch -n2 "echo `date +%F`">> logger'
+#watch -n1 'echo watch -n2 "echo watch -n2 \"echo `date +%F` \">> logger">> logger'
+echo -n 'wat is your mane? '
+read NAME
+echo "hello $NAME!"
+echo `date +%F.%T` $NAME >> `date +%F`.log
+
+ls -1 | while read LINE; do
+    echo -n "$LINE ";
+    wc -l $LINE | awk '{print $1}';
+done
+
+#while true; do
+#    node server.js;
+#done
